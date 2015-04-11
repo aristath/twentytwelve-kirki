@@ -354,12 +354,31 @@ function kirki_twentytwelve_fields( $fields ) {
         'label'    => __( 'Layout', 'twentytwelve' ),
         'section'  => 'layout',
         'default'  => 'right-sidebar',
-        'priority' => 70,
+        'priority' => 10,
         'choices'  => array(
 			'full'          => trailingslashit( KIRKI_URL ) . 'assets/images/1c.png',
 			'left-sidebar'  => trailingslashit( KIRKI_URL ) . 'assets/images/2cl.png',
 			'right-sidebar' => trailingslashit( KIRKI_URL ) . 'assets/images/2cr.png',
         ),
+    );
+
+	$fields[] = array(
+        'type'     => 'slider',
+        'settings' => 'site_width',
+        'label'    => __( 'Site width', 'twentytwelve' ),
+        'section'  => 'layout',
+        'priority' => 20,
+        'default'  => 1020,
+        'choices'  => array(
+            'min'  => 640,
+            'max'  => 1600,
+            'step' => 1,
+        ),
+        'output'   => array(
+			'element'  => 'body #page',
+            'property' => 'max-width',
+            'units'    => 'px',
+        )
     );
 
 	return $fields;
@@ -383,3 +402,26 @@ function kirki_twentytwelve_configuration() {
 
 }
 add_filter( 'kirki/config', 'kirki_twentytwelve_configuration' );
+
+/**
+ * Custom CSS
+ */
+function kirki_twentytwelve_custom_css() {
+
+	// Early exit if Kirki is not installed
+	if ( ! function_exists( 'kirki_get_option' ) ) {
+		return;
+	}
+
+	// Add custom CSS for layouts
+	$css = '';
+	if ( 'full' == kirki_get_option( 'layout' ) ) {
+		$css .= '#primary{width:100%;}';
+	} elseif ( 'left-sidebar' == kirki_get_option( 'layout' ) ) {
+		$css .= '#primary{float:right;}#secondary{float:left;}';
+	}
+
+	wp_add_inline_style( 'twentytwelve-style', $css );
+
+}
+add_action( 'wp_enqueue_scripts', 'kirki_twentytwelve_custom_css' );
