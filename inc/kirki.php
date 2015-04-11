@@ -11,15 +11,19 @@ function kirki_twentytwelve_panels_sections( $wp_customize ) {
 	/**
 	 * Add panels
 	 */
-	$wp_customize->add_panel( 'kirki', array(
+	$wp_customize->add_panel( 'backgrounds', array(
 		'priority'    => 10,
-		'title'       => __( 'Kirki', 'kirki' ),
+		'title'       => __( '', 'kirki' ),
 	) );
 
-	$wp_customize->add_section( 'content_background', array(
-		'title'       => __( 'Content Background', 'kirki' ),
+    $wp_customize->add_section( 'background', array(
+		'title'       => __( 'Background', 'kirki' ),
 		'priority'    => 10,
-		'panel'       => 'kirki',
+	) );
+
+    $wp_customize->add_section( 'typography', array(
+		'title'       => __( 'Typography', 'kirki' ),
+		'priority'    => 10,
 	) );
 
 }
@@ -30,6 +34,295 @@ add_action( 'customize_register', 'kirki_twentytwelve_panels_sections' );
  * Add our controls.
  */
 function kirki_twentytwelve_fields( $fields ) {
+
+    $fields[] = array(
+        'type'        => 'color',
+        'setting'     => 'text_color',
+        'label'       => __( 'Main Color', 'kirki' ),
+        'section'     => 'typography',
+        'default'     => '#222',
+        'priority'    => 10,
+        'output'      => array(
+            'element'  => 'body #page',
+            'property' => 'color',
+        )
+    );
+
+    $fields[] = array(
+        'type'        => 'color',
+        'setting'     => 'headers_color',
+        'label'       => __( 'Headers Color', 'kirki' ),
+        'section'     => 'typography',
+        'default'     => '#555',
+        'priority'    => 10,
+        'output'      => array(
+            'element'  => 'body #page h1, body #page h2, body #page h3, body #page h4, body #page h5, body #page h6',
+            'property' => 'color',
+        )
+    );
+
+    $fields[] = array(
+        'type'        => 'color',
+        'setting'     => 'links_color',
+        'label'       => __( 'Links Color', 'kirki' ),
+        'section'     => 'typography',
+        'default'     => '#08c',
+        'priority'    => 10,
+        'output'      => array(
+            'element'  => 'body #page a, body #page a:link, body #page a:visited, body #page a:hover',
+            'property' => 'color',
+        )
+    );
+
+    $fields[] = array(
+        'type'        => 'select',
+        'setting'     => 'body_font_family',
+        'label'       => __( 'Body Font-Family', 'kirki' ),
+        'description' => __( 'Choose any google font you want!', 'kirki' ),
+        'help'        => __( 'Kirki integrates with google fonts and automatically does everything for you. From creating the fonts list to generating the google scripts needed.', 'kirki' ),
+        'section'     => 'typography',
+        'default'     => 'Roboto',
+        'priority'    => 10,
+        'choices'     => Kirki_Fonts::get_font_choices(),
+        'output'      => array(
+            'element'  => 'body #page',
+            'property' => 'font-family',
+        )
+    );
+
+    $fields[] = array(
+        'type'        => 'select',
+        'setting'     => 'headers_font_family',
+        'label'       => __( 'Headers Font-Family', 'kirki' ),
+        'description' => __( 'Choose any google font you want!', 'kirki' ),
+        'help'        => __( 'Kirki integrates with google fonts and automatically does everything for you. From creating the fonts list to generating the google scripts needed.', 'kirki' ),
+        'section'     => 'typography',
+        'default'     => 'Roboto Slab',
+        'priority'    => 10,
+        'choices'     => Kirki_Fonts::get_font_choices(),
+        'output'      => array(
+            'element'  => 'body #page h1, body #page h2, body #page h3, body #page h4, body #page h5, body #page h6',
+            'property' => 'font-family',
+        )
+    );
+
+    $fields[] = array(
+        'type'     => 'multicheck',
+        'settings' => 'font_subsets',
+        'label'    => __( 'Google-Font subsets', 'kirki' ),
+        'description' => __( 'The subsets used from Google\'s API.', 'kirki' ),
+        'section'  => 'typography',
+        'default'  => 'all',
+        'priority' => 10,
+        'choices'  => Kirki_Fonts::get_google_font_subsets(),
+        'output' => array(
+            'element'  => 'body #page',
+            'property' => 'font-subset',
+        ),
+    );
+
+    $fields[] = array(
+        'type'     => 'slider',
+        'settings' => 'base_font_size',
+        'label'    => __( 'Base font-size', 'kirki' ),
+        'section'  => 'typography',
+        'priority' => 20,
+        'default'  => 16,
+        'choices'  => array(
+            'min'  => 4,
+            'max'  => 32,
+            'step' => 1,
+        ),
+        'output'   => array(
+            'property' => 'font-size',
+            'units'    => 'px',
+            'element'  => 'body #page',
+        )
+    );
+
+    $fields[] = array(
+        'type'     => 'slider',
+        'settings' => 'font_base_weight',
+        'label'    => __( 'Base Font Weight', 'kirki' ),
+        'section'  => 'typography',
+        'default'  => 100,
+        'priority' => 25,
+        'choices'  => array(
+            'min'  => 100,
+            'max'  => 900,
+            'step' => 100,
+        ),
+        'output' => array(
+            'element'  => 'body #page',
+            'property' => 'font-weight',
+        ),
+    );
+
+    $fields[] = array(
+        'type'     => 'slider',
+        'settings' => 'font_base_height',
+        'label'    => __( 'Base Line Height', 'kirki' ),
+        'section'  => 'typography',
+        'default'  => 1.43,
+        'priority' => 30,
+        'choices'  => array(
+            'min'  => 0,
+            'max'  => 3,
+            'step' => 0.01,
+        ),
+        'output' => array(
+            'element'  => 'body #page',
+            'property' => 'line-height',
+        ),
+    );
+
+    $fields[] = array(
+        'type'     => 'slider',
+        'settings' => 'font_headers_weight_h1',
+        'label'    => __( 'H1 Font Weight', 'kirki' ),
+        'section'  => 'typography',
+        'default'  => 900,
+        'priority' => 35,
+        'choices'  => array(
+            'min'  => 100,
+            'max'  => 900,
+            'step' => 100,
+        ),
+        'output' => array(
+            'element'  => 'body #page h1',
+            'property' => 'font-weight',
+        ),
+    );
+
+    $fields[] = array(
+        'type'     => 'slider',
+        'settings' => 'font_headers_weight_h2',
+        'label'    => __( 'H2 Font Weight', 'kirki' ),
+        'section'  => 'typography',
+        'default'  => 800,
+        'priority' => 40,
+        'choices'  => array(
+            'min'  => 100,
+            'max'  => 900,
+            'step' => 100,
+        ),
+        'output' => array(
+            'element'  => 'body #page h2',
+            'property' => 'font-weight',
+        ),
+    );
+
+    $fields[] = array(
+        'type'     => 'slider',
+        'settings' => 'font_headers_weight_h3',
+        'label'    => __( 'H2 Font Weight', 'kirki' ),
+        'section'  => 'typography',
+        'default'  => 600,
+        'priority' => 45,
+        'choices'  => array(
+            'min'  => 100,
+            'max'  => 900,
+            'step' => 100,
+        ),
+        'output' => array(
+            'element'  => 'body #page h3',
+            'property' => 'font-weight',
+        ),
+    );
+
+    $fields[] = array(
+        'type'     => 'slider',
+        'settings' => 'font_headers_weight_h4',
+        'label'    => __( 'H4 Font Weight', 'kirki' ),
+        'section'  => 'typography',
+        'default'  => 400,
+        'priority' => 50,
+        'choices'  => array(
+            'min'  => 100,
+            'max'  => 900,
+            'step' => 100,
+        ),
+        'output' => array(
+            'element'  => 'body #page h4',
+            'property' => 'font-weight',
+        ),
+    );
+
+    $fields[] = array(
+        'type'     => 'slider',
+        'settings' => 'font_h1_size',
+        'label'    => __( 'H1 Font Size', 'kirki' ),
+        'section'  => 'typography',
+        'default'  => 52,
+        'priority' => 55,
+        'choices'  => array(
+            'min'  => 7,
+            'max'  => 72,
+            'step' => 1,
+        ),
+        'output' => array(
+            'element'  => 'body #page h1',
+            'property' => 'font-size',
+            'units'    => 'px',
+        ),
+    );
+
+    $fields[] = array(
+        'type'     => 'slider',
+        'settings' => 'font_h2_size',
+        'label'    => __( 'H2 Font Size', 'kirki' ),
+        'section'  => 'typography',
+        'default'  => 36,
+        'priority' => 60,
+        'choices'  => array(
+            'min'  => 7,
+            'max'  => 72,
+            'step' => 1,
+        ),
+        'output' => array(
+            'element'  => 'body #page h2',
+            'property' => 'font-size',
+            'units'    => 'px',
+        ),
+    );
+
+    $fields[] = array(
+        'type'     => 'slider',
+        'settings' => 'font_h3_size',
+        'label'    => __( 'H3 Font Size', 'kirki' ),
+        'section'  => 'typography',
+        'default'  => 24,
+        'priority' => 65,
+        'choices'  => array(
+            'min'  => 7,
+            'max'  => 72,
+            'step' => 1,
+        ),
+        'output' => array(
+            'element'  => 'body #page h3',
+            'property' => 'font-size',
+            'units'    => 'px',
+        ),
+    );
+
+    $fields[] = array(
+        'type'     => 'slider',
+        'settings' => 'font_h4_size',
+        'label'    => __( 'H4 Font Size', 'kirki' ),
+        'section'  => 'typography',
+        'default'  => 18,
+        'priority' => 70,
+        'choices'  => array(
+            'min'  => 7,
+            'max'  => 72,
+            'step' => 1,
+        ),
+        'output' => array(
+            'element'  => 'body #page h4',
+            'property' => 'font-size',
+            'units'    => 'px',
+        ),
+    );
 
 	return $fields;
 
