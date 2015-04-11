@@ -1,13 +1,6 @@
 <?php
 /**
  * Kirki Advanced Customizer
- *
- * This is a sample configuration file to demonstrate all fields & capabilities.
- *
- * CAUTION:
- * USE THIS WITH THE DEVELOP BRANCH ON THE GITHUB REPOSITORY:
- * https://github.com/aristath/kirki/tree/develop
- *
  * @package Kirki
  */
 
