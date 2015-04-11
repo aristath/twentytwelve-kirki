@@ -63,13 +63,13 @@ function twentytwelve_setup() {
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menu( 'primary', __( 'Primary Menu', 'twentytwelve' ) );
 
-	/*
-	 * This theme supports custom background color and image,
-	 * and here we also set up the default background color.
-	 */
-	add_theme_support( 'custom-background', array(
-		'default-color' => 'e6e6e6',
-	) );
+	// /*
+	//  * This theme supports custom background color and image,
+	//  * and here we also set up the default background color.
+	//  */
+	// add_theme_support( 'custom-background', array(
+	// 	'default-color' => 'e6e6e6',
+	// ) );
 
 	// This theme uses a custom image size for featured images, displayed on "standard" posts.
 	add_theme_support( 'post-thumbnails' );
@@ -80,7 +80,7 @@ add_action( 'after_setup_theme', 'twentytwelve_setup' );
 /**
  * Add support for a custom header image.
  */
-require( get_template_directory() . '/inc/custom-header.php' );
+// require( get_template_directory() . '/inc/custom-header.php' );
 
 /**
  * Return the Google font stylesheet URL if available.
@@ -279,14 +279,12 @@ if ( ! function_exists( 'twentytwelve_content_nav' ) ) :
 function twentytwelve_content_nav( $html_id ) {
 	global $wp_query;
 
-	$html_id = esc_attr( $html_id );
-
 	if ( $wp_query->max_num_pages > 1 ) : ?>
-		<nav id="<?php echo $html_id; ?>" class="navigation" role="navigation">
+		<nav id="<?php echo esc_attr( $html_id ); ?>" class="navigation" role="navigation">
 			<h3 class="assistive-text"><?php _e( 'Post navigation', 'twentytwelve' ); ?></h3>
 			<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'twentytwelve' ) ); ?></div>
 			<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'twentytwelve' ) ); ?></div>
-		</nav><!-- #<?php echo $html_id; ?> .navigation -->
+		</nav><!-- .navigation -->
 	<?php endif;
 }
 endif;
@@ -422,8 +420,8 @@ endif;
  * @return array Filtered class values.
  */
 function twentytwelve_body_class( $classes ) {
-	$background_color = get_background_color();
-	$background_image = get_background_image();
+	// $background_color = get_background_color();
+	// $background_image = get_background_image();
 
 	if ( ! is_active_sidebar( 'sidebar-1' ) || is_page_template( 'page-templates/full-width.php' ) )
 		$classes[] = 'full-width';
@@ -436,12 +434,12 @@ function twentytwelve_body_class( $classes ) {
 			$classes[] = 'two-sidebars';
 	}
 
-	if ( empty( $background_image ) ) {
-		if ( empty( $background_color ) )
+	// if ( empty( $background_image ) ) {
+	// 	if ( empty( $background_color ) )
 			$classes[] = 'custom-background-empty';
-		elseif ( in_array( $background_color, array( 'fff', 'ffffff' ) ) )
-			$classes[] = 'custom-background-white';
-	}
+	// 	elseif ( in_array( $background_color, array( 'fff', 'ffffff' ) ) )
+	// 		$classes[] = 'custom-background-white';
+	// }
 
 	// Enable custom font class only if the font CSS is queued to load.
 	if ( wp_style_is( 'twentytwelve-fonts', 'queue' ) )
@@ -484,7 +482,7 @@ function twentytwelve_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 }
-add_action( 'customize_register', 'twentytwelve_customize_register' );
+// add_action( 'customize_register', 'twentytwelve_customize_register' );
 
 /**
  * Enqueue Javascript postMessage handlers for the Customizer.
