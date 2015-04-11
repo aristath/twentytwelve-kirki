@@ -1768,3 +1768,7 @@ img#wpstats {
 		margin-left: 3.57142857rem;
 	}
 }
+
+body #page {
+	padding: 0 30px;
+}

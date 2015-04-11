@@ -13,17 +13,22 @@ function kirki_twentytwelve_panels_sections( $wp_customize ) {
 	 */
 	$wp_customize->add_panel( 'backgrounds', array(
 		'priority'    => 10,
-		'title'       => __( '', 'kirki' ),
-	) );
-
-    $wp_customize->add_section( 'background', array(
-		'title'       => __( 'Background', 'kirki' ),
-		'priority'    => 10,
+		'title'       => __( '', 'twentytwelve' ),
 	) );
 
     $wp_customize->add_section( 'typography', array(
-		'title'       => __( 'Typography', 'kirki' ),
+		'title'       => __( 'Typography', 'twentytwelve' ),
 		'priority'    => 10,
+	) );
+
+	$wp_customize->add_section( 'background', array(
+		'title'       => __( 'Background', 'twentytwelve' ),
+		'priority'    => 20,
+	) );
+
+	$wp_customize->add_section( 'layout', array(
+		'title'       => __( 'Layout', 'twentytwelve' ),
+		'priority'    => 30,
 	) );
 
 }
@@ -38,7 +43,7 @@ function kirki_twentytwelve_fields( $fields ) {
     $fields[] = array(
         'type'        => 'color',
         'setting'     => 'text_color',
-        'label'       => __( 'Main Color', 'kirki' ),
+        'label'       => __( 'Main Color', 'twentytwelve' ),
         'section'     => 'typography',
         'default'     => '#222',
         'priority'    => 10,
@@ -51,7 +56,7 @@ function kirki_twentytwelve_fields( $fields ) {
     $fields[] = array(
         'type'        => 'color',
         'setting'     => 'headers_color',
-        'label'       => __( 'Headers Color', 'kirki' ),
+        'label'       => __( 'Headers Color', 'twentytwelve' ),
         'section'     => 'typography',
         'default'     => '#555',
         'priority'    => 10,
@@ -64,7 +69,7 @@ function kirki_twentytwelve_fields( $fields ) {
     $fields[] = array(
         'type'        => 'color',
         'setting'     => 'links_color',
-        'label'       => __( 'Links Color', 'kirki' ),
+        'label'       => __( 'Links Color', 'twentytwelve' ),
         'section'     => 'typography',
         'default'     => '#08c',
         'priority'    => 10,
@@ -77,9 +82,9 @@ function kirki_twentytwelve_fields( $fields ) {
     $fields[] = array(
         'type'        => 'select',
         'setting'     => 'body_font_family',
-        'label'       => __( 'Body Font-Family', 'kirki' ),
-        'description' => __( 'Choose any google font you want!', 'kirki' ),
-        'help'        => __( 'Kirki integrates with google fonts and automatically does everything for you. From creating the fonts list to generating the google scripts needed.', 'kirki' ),
+        'label'       => __( 'Body Font-Family', 'twentytwelve' ),
+        'description' => __( 'Choose any google font you want!', 'twentytwelve' ),
+        'help'        => __( 'Kirki integrates with google fonts and automatically does everything for you. From creating the fonts list to generating the google scripts needed.', 'twentytwelve' ),
         'section'     => 'typography',
         'default'     => 'Roboto',
         'priority'    => 10,
@@ -93,9 +98,9 @@ function kirki_twentytwelve_fields( $fields ) {
     $fields[] = array(
         'type'        => 'select',
         'setting'     => 'headers_font_family',
-        'label'       => __( 'Headers Font-Family', 'kirki' ),
-        'description' => __( 'Choose any google font you want!', 'kirki' ),
-        'help'        => __( 'Kirki integrates with google fonts and automatically does everything for you. From creating the fonts list to generating the google scripts needed.', 'kirki' ),
+        'label'       => __( 'Headers Font-Family', 'twentytwelve' ),
+        'description' => __( 'Choose any google font you want!', 'twentytwelve' ),
+        'help'        => __( 'Kirki integrates with google fonts and automatically does everything for you. From creating the fonts list to generating the google scripts needed.', 'twentytwelve' ),
         'section'     => 'typography',
         'default'     => 'Roboto Slab',
         'priority'    => 10,
@@ -109,8 +114,8 @@ function kirki_twentytwelve_fields( $fields ) {
     $fields[] = array(
         'type'     => 'multicheck',
         'settings' => 'font_subsets',
-        'label'    => __( 'Google-Font subsets', 'kirki' ),
-        'description' => __( 'The subsets used from Google\'s API.', 'kirki' ),
+        'label'    => __( 'Google-Font subsets', 'twentytwelve' ),
+        'description' => __( 'The subsets used from Google\'s API.', 'twentytwelve' ),
         'section'  => 'typography',
         'default'  => 'all',
         'priority' => 10,
@@ -124,7 +129,7 @@ function kirki_twentytwelve_fields( $fields ) {
     $fields[] = array(
         'type'     => 'slider',
         'settings' => 'base_font_size',
-        'label'    => __( 'Base font-size', 'kirki' ),
+        'label'    => __( 'Base font-size', 'twentytwelve' ),
         'section'  => 'typography',
         'priority' => 20,
         'default'  => 16,
@@ -143,7 +148,7 @@ function kirki_twentytwelve_fields( $fields ) {
     $fields[] = array(
         'type'     => 'slider',
         'settings' => 'font_base_weight',
-        'label'    => __( 'Base Font Weight', 'kirki' ),
+        'label'    => __( 'Base Font Weight', 'twentytwelve' ),
         'section'  => 'typography',
         'default'  => 100,
         'priority' => 25,
@@ -161,7 +166,7 @@ function kirki_twentytwelve_fields( $fields ) {
     $fields[] = array(
         'type'     => 'slider',
         'settings' => 'font_base_height',
-        'label'    => __( 'Base Line Height', 'kirki' ),
+        'label'    => __( 'Base Line Height', 'twentytwelve' ),
         'section'  => 'typography',
         'default'  => 1.43,
         'priority' => 30,
@@ -179,7 +184,7 @@ function kirki_twentytwelve_fields( $fields ) {
     $fields[] = array(
         'type'     => 'slider',
         'settings' => 'font_headers_weight_h1',
-        'label'    => __( 'H1 Font Weight', 'kirki' ),
+        'label'    => __( 'H1 Font Weight', 'twentytwelve' ),
         'section'  => 'typography',
         'default'  => 900,
         'priority' => 35,
@@ -197,7 +202,7 @@ function kirki_twentytwelve_fields( $fields ) {
     $fields[] = array(
         'type'     => 'slider',
         'settings' => 'font_headers_weight_h2',
-        'label'    => __( 'H2 Font Weight', 'kirki' ),
+        'label'    => __( 'H2 Font Weight', 'twentytwelve' ),
         'section'  => 'typography',
         'default'  => 800,
         'priority' => 40,
@@ -215,7 +220,7 @@ function kirki_twentytwelve_fields( $fields ) {
     $fields[] = array(
         'type'     => 'slider',
         'settings' => 'font_headers_weight_h3',
-        'label'    => __( 'H2 Font Weight', 'kirki' ),
+        'label'    => __( 'H2 Font Weight', 'twentytwelve' ),
         'section'  => 'typography',
         'default'  => 600,
         'priority' => 45,
@@ -233,7 +238,7 @@ function kirki_twentytwelve_fields( $fields ) {
     $fields[] = array(
         'type'     => 'slider',
         'settings' => 'font_headers_weight_h4',
-        'label'    => __( 'H4 Font Weight', 'kirki' ),
+        'label'    => __( 'H4 Font Weight', 'twentytwelve' ),
         'section'  => 'typography',
         'default'  => 400,
         'priority' => 50,
@@ -251,7 +256,7 @@ function kirki_twentytwelve_fields( $fields ) {
     $fields[] = array(
         'type'     => 'slider',
         'settings' => 'font_h1_size',
-        'label'    => __( 'H1 Font Size', 'kirki' ),
+        'label'    => __( 'H1 Font Size', 'twentytwelve' ),
         'section'  => 'typography',
         'default'  => 52,
         'priority' => 55,
@@ -270,7 +275,7 @@ function kirki_twentytwelve_fields( $fields ) {
     $fields[] = array(
         'type'     => 'slider',
         'settings' => 'font_h2_size',
-        'label'    => __( 'H2 Font Size', 'kirki' ),
+        'label'    => __( 'H2 Font Size', 'twentytwelve' ),
         'section'  => 'typography',
         'default'  => 36,
         'priority' => 60,
@@ -289,7 +294,7 @@ function kirki_twentytwelve_fields( $fields ) {
     $fields[] = array(
         'type'     => 'slider',
         'settings' => 'font_h3_size',
-        'label'    => __( 'H3 Font Size', 'kirki' ),
+        'label'    => __( 'H3 Font Size', 'twentytwelve' ),
         'section'  => 'typography',
         'default'  => 24,
         'priority' => 65,
@@ -308,7 +313,7 @@ function kirki_twentytwelve_fields( $fields ) {
     $fields[] = array(
         'type'     => 'slider',
         'settings' => 'font_h4_size',
-        'label'    => __( 'H4 Font Size', 'kirki' ),
+        'label'    => __( 'H4 Font Size', 'twentytwelve' ),
         'section'  => 'typography',
         'default'  => 18,
         'priority' => 70,
@@ -324,6 +329,39 @@ function kirki_twentytwelve_fields( $fields ) {
         ),
     );
 
+    $fields[] = array(
+        'type'        => 'background',
+        'setting'     => 'background',
+        'label'       => __( 'Main Background', 'twentytwelve' ),
+        'description' => __( 'Choose a background image and color for your site', 'twentytwelve' ),
+        'section'     => 'background',
+        'default'     => array(
+            'color'    => 'rgba(10,10,10,0.22)',
+            'image'    => '',
+            'repeat'   => 'no-repeat',
+            'size'     => 'cover',
+            'attach'   => 'fixed',
+            'position' => 'left-top',
+        ),
+        'priority'    => 10,
+        'output'      => 'html body.custom-background-empty, html body',
+        'units'       => ' !important'
+    );
+
+	$fields[] = array(
+        'type'     => 'radio-image',
+        'settings' => 'layout',
+        'label'    => __( 'Layout', 'twentytwelve' ),
+        'section'  => 'layout',
+        'default'  => 'right-sidebar',
+        'priority' => 70,
+        'choices'  => array(
+			'full'          => trailingslashit( KIRKI_URL ) . 'assets/images/1c.png',
+			'left-sidebar'  => trailingslashit( KIRKI_URL ) . 'assets/images/2cl.png',
+			'right-sidebar' => trailingslashit( KIRKI_URL ) . 'assets/images/2cr.png',
+        ),
+    );
+
 	return $fields;
 
 }
@@ -336,7 +374,7 @@ function kirki_twentytwelve_configuration() {
 
     $args = array(
         'logo_image'    => 'http://kirki.org/images/logo.png',
-        'description'   => __( 'This is the theme description. You can edit it in the Kirki configuration and add whatever you want here.', 'kirki' ),
+        'description'   => __( 'This is the theme description. You can edit it in the Kirki configuration and add whatever you want here.', 'twentytwelve' ),
         'color_accent'  => '#00bcd4',
         'color_back'    => '#455a64',
     );
